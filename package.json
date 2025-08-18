@@ -1,0 +1,11 @@
+{
+  "name": "backend-ptas3",
+  "version": "1.0.0",
+  "description": "projeto final fullstack das disciplinas de programação e tecnologias para cliente 4 e programação e tecnologias para cliente 3",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "João Pedro de Oliveira Barbosa",
+  "license": "ISC"
+}
