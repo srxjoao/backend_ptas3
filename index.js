@@ -1,0 +1,1 @@
+console.log("INFO 6A, A MELHOR, A MAIS MAIS")
