@@ -1,0 +1,15 @@
+para cadastro 
+http://localhost:3000/cadastro/cadastro | POST
+
+Login 
+http://localhost:3000/cadastro/login | POST
+
+Teste Login 
+{
+  "email": "lucas.alves@gmail.com",
+  "senha": "bolsafamilia"
+}
+
+Area Restrita 
+http://localhost:3000/areaLogada | GET
+
