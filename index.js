@@ -1,7 +1,9 @@
-const express = require("express");
+const express = require('express');
+const cors = require('cors');
 const app = express();
 
 app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 app.use(express.json());
 
 app.get("/", (req, res) => {
@@ -22,6 +24,6 @@ app.get("/areaLogada", userController.verificaLogin, (req, res, next) => {
   });
 });
 
-app.listen(3000, (err) => {
-  console.log("A aplicação esta rodando na porta 3000");
+app.listen(1414, (err) => {
+  console.log("A aplicação esta rodando na porta 1414");
 });
