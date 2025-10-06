@@ -12,4 +12,3 @@ Teste Login
 
 Area Restrita 
 http://localhost:3000/areaLogada | GET
-

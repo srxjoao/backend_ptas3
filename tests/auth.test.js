@@ -3,10 +3,8 @@ const { PrismaClient } = require('@prisma/client');
 const bcryptjs = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-// Mock global para process.env
 process.env.KEY_SERVER = 'test-key';
 
-// Mock do PrismaClient (apenas para usuario.create e findUnique)
 jest.mock('@prisma/client', () => {
   const mockPrisma = {
     usuario: {
@@ -19,45 +17,38 @@ jest.mock('@prisma/client', () => {
   };
 });
 
-const mockClient = new PrismaClient(); // Usará o mock
+const mockClient = new PrismaClient(); 
 
-// Mock do bcryptjs
 jest.mock('bcryptjs', () => ({
   genSaltSync: jest.fn(),
   hashSync: jest.fn(),
   compareSync: jest.fn(),
 }));
 
-// Mock do jwt (apenas para sign no login)
 jest.mock('jsonwebtoken', () => ({
   sign: jest.fn(),
 }));
 
-// Mock do console.log para evitar poluição
 jest.spyOn(console, 'log').mockImplementation(() => {});
 
 describe('User  Controller - Testes Simples', () => {
   let req, res;
 
   beforeEach(() => {
-    // Mock req
     req = {
       body: {},
       headers: {},
     };
 
-    // Mock res
     res = {
       json: jest.fn(),
     };
 
-    // Limpa mocks entre testes
     jest.clearAllMocks();
   });
 
   describe('cadastrar (criação de conta)', () => {
     it('deve cadastrar um usuário com sucesso quando todos os dados são fornecidos', async () => {
-      // Setup mocks
       const mockSalt = 'mock-salt';
       const mockHash = 'mock-hashed-password';
       const mockUser  = { id: 1, nome: 'João', email: 'joao@example.com', senha: mockHash };
@@ -84,7 +75,6 @@ describe('User  Controller - Testes Simples', () => {
     });
 
     it('deve cadastrar com dados vazios (sem validação no código original)', async () => {
-      // O código não valida campos, então testa com body vazio para simular
       const mockSalt = 'mock-salt';
       const mockHash = 'mock-hashed-password';
       const mockUser  = { id: 1 };
@@ -105,13 +95,11 @@ describe('User  Controller - Testes Simples', () => {
         },
       });
       expect(res.json).toHaveBeenCalledWith({ usuarioId: 1 });
-      // Sugestão: Adicione validação no controller para retornar erro se campos estiverem vazios.
     });
   });
 
   describe('login', () => {
     it('deve fazer login com sucesso quando email e senha estão corretos', async () => {
-      // Setup mocks
       const mockUser  = { id: 1, email: 'joao@example.com', senha: 'hashed-password' };
       const mockToken = 'mock-jwt-token';
 
